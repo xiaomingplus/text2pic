@@ -1,0 +1,25 @@
+{
+	 "name": "dsgygb/text2pic",
+	 "type": "library",
+    "description": "text to picture",
+    "keywords": ["text2pic","pic"],
+    "homepage": "https://github.com/dsgygb/text2pic",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Guobao Yang",
+            "email": "dsgygb@126.com",
+            "homepage": "http://www.yangguobao.cn",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dsgygb\\Text2pic\\": "src/"
+        }
+    }
+    
+}
