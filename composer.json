@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Dsgygb\\Text2pic\\": "src/"
+            "Dsgygb\\Text2pic\\": "src"
         }
     }
     
