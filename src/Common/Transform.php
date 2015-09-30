@@ -1,6 +1,7 @@
 <?php
 namespace Dsgygb\Text2pic;
-require '../vendor/autoload.php';
+use Dsgygb\Text2pic\Path;
+use Dsgygb\Text2pic\Common;
 class Transform {
 
 private $by = "";
