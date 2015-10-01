@@ -8,6 +8,8 @@
 
 ### 如何使用？
 
+使用composer安装本模块后，仅仅需要3行代码就可以生成了：
+
 	$ composer require dsgygb/text2pic
 	$ touch test.php
 
@@ -19,7 +21,9 @@
 	
 	$transform = new Text2pic\Transform('by text2pic');
 	$result = $transform->generate("hello world");
+	print_r($result);
 ---
+在浏览器访问该网页:
 
 	output:
 	
