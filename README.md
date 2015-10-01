@@ -84,7 +84,7 @@
 		
 
 图片示例:
-![](http://static.scuinfo.com/uploads/9423003ddd9a956e81aecfbb1f762b4b.jpg)
+![](https://github.com/dsgygb/text2pic/blob/master/src/Publics/images/sample_pic.jpg?raw=true)
 
 
 欢迎使用和提建议。
