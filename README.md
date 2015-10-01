@@ -17,7 +17,7 @@
 
 	<?php
 	
-	require '../vendor/autoload.php';
+	require 'vendor/autoload.php';
 	
 	$transform = new Text2pic\Transform('by text2pic');
 	$result = $transform->generate("hello world");
