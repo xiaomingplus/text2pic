@@ -1,7 +1,7 @@
 <?php
 
 require './vendor/autoload.php';
-$transform = new Dsgygb\Text2pic\Transform('by text2pic');
+$transform = new Text2pic\Common\Transform('by text2pic');
 $result = $transform->generate("好烦啊hello\nworld!");
 
 if($result['code']==200){

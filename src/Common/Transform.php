@@ -1,7 +1,7 @@
 <?php
-namespace Dsgygb\Text2pic;
-use Dsgygb\Text2pic\Path;
-use Dsgygb\Text2pic\Common;
+namespace Text2pic\Common;
+use Text2pic\Publics\Path;
+use Text2pic\Common\Common;
 class Transform {
 
 private $by = "";

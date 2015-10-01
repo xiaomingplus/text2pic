@@ -1,5 +1,5 @@
 <?php
-namespace Dsgygb\Text2pic;
+namespace Text2pic\Common;
 
 class Common{
 public static function fileName (){

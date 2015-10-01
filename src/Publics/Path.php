@@ -1,5 +1,5 @@
 <?php
-namespace Dsgygb\Text2pic;
+namespace Text2pic\Publics;
 
 class Path{
 
