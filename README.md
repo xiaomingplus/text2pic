@@ -1,45 +1,81 @@
 
-## php文字转图片接口
+## php文字生成图片(使用composer构建)
 
-使用php实现，生成后的图片界面是仿照锤子便签的生成长微博的界面,使用的是苹方字体,你也可以选择使用你自己的喜欢的字体,非常容易配置。
+生成后的图片界面是仿照锤子便签的生成长微博的界面,使用的是苹方字体,你也可以选择使用你自己的喜欢的字体,非常容易配置。
 
 
+
+
+### 如何使用？
+
+	require '../vendor/autoload.php';
+	$transform = new Text2pic\Transform('by text2pic');
+	$result = $transform->generate("hello world");
+	
+	/**
+	output:
+	
+	Array
+	(
+    [code] => 200,
+    [message] => ok,
+    [data] => Array
+        (
+            [url] => "pic url",
+            [path] => "pic path"
+        )
+
+	)
+	
+	*/
+
+### 详细参数
+
+#### 实例化
+
+	$transform=new Text2pic\Transform($by,$uploadsPath,$uploadsUrl,$fontPath);
+	
+	
+> *$by* :可选,string,生成后的图片的后缀,默认为空;
+
+> *$uploadsPath*:可选,string,保存生成后的图片的路径,如果填写此参数,则必须填写*$uploadsUrl*:参数,默认为当前的包下面的'src/Publics/uploads';
+
+> *$uploadsUrl*:可选,string,自定义路径后的该路径的url访问的绝对地址;
+
+> *$fontpath*: 可选,string,自定义字体文件的路径
+
+
+#### 调用生成图片的方法
+
+	$transform->generate($text);
+	
+> *$text*:必填,string,填写生成图片的内容。支持"\n"换行
+
+
+#### 调用返回
+
+	Array
+	(
+    [code] => 200,
+    [message] => ok,
+    [data] => Array
+        (
+            [url] => "pic url",
+            [path] => "pic path"
+        )
+
+	)
+	
+> 如果返回的数组的code==200，则成功生成,其他情况则生成失败，调用message查看错误信息。
+> 
+> data里的url是生成的图片网址,path是生成图片的路径，你可以用这个路径去上传图片到又拍云或者其他地方，然后可以unlink（删除）这个文件。
+	
+		
 
 图片示例:
 ![](http://static.scuinfo.com/uploads/9423003ddd9a956e81aecfbb1f762b4b.jpg)
 
-### 如何使用？
 
-```git clone```或下载后，将根目录下的```config.php.example``` 改为```config.php```
-
-然后修改config.php的配置项，可选择是否开启又拍云的上传，默认关闭。配置好项目的绝对网址，一切就已经就绪了。
-
-### 接口API
-
-		{
-		method:"post",
-		url:"/index.php",
-		params:{
-		text:"" //要生成文字的内容
-		},
-		return:
-		{
-    	"code": 200,
-    	"message": "ok",
-    	"data": {
-        		"url": "http://static.scuinfo.com/uploads/9423003ddd9a956e81aecfbb1f762b4b.jpg"
-    			}
-		}
-		}
-		
-		
-ps代码写的比较糟，但是能用^_^,源代码根据网络上的7384长微博文字生成图片系统 v0.1做了比较多的修改而成，原作者链接已访问不了，在这表达敬意。
-
-在这个地址下载的源代码:http://www.softhy.net/soft/34246.htm 
-
-修改的内容除了界面的全新修改，还有：源代码是gbk的，我转成了utf8，以及把整体的架构变的更有条理一些。
-
-
-
+欢迎使用和提建议。
 
 

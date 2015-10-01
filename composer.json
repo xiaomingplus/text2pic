@@ -1,13 +1,13 @@
 {
 	 "name": "dsgygb/text2pic",
 	 "type": "library",
-    "description": "text to picture",
-    "keywords": ["text2pic","pic"],
+    "description": "文字生成图片,生成长微博,text generate picture",
+    "keywords": ["text2pic","文字生成图片","generate picture"],
     "homepage": "https://github.com/dsgygb/text2pic",
     "license": "MIT",
     "authors": [
         {
-            "name": "Guobao Yang",
+            "name": "杨国宝",
             "email": "dsgygb@126.com",
             "homepage": "http://www.yangguobao.cn",
             "role": "Developer"
