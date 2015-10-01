@@ -8,11 +8,19 @@
 
 ### 如何使用？
 
+	$ composer require dsgygb/text2pic
+	$ touch test.php
+
+---	
+
+	<?php
+	
 	require '../vendor/autoload.php';
+	
 	$transform = new Text2pic\Transform('by text2pic');
 	$result = $transform->generate("hello world");
-	
-	/**
+---
+
 	output:
 	
 	Array
@@ -27,7 +35,6 @@
 
 	)
 	
-	*/
 
 ### 详细参数
 
@@ -67,7 +74,7 @@
 	)
 	
 > 如果返回的数组的code==200，则成功生成,其他情况则生成失败，调用message查看错误信息。
-> 
+
 > data里的url是生成的图片网址,path是生成图片的路径，你可以用这个路径去上传图片到又拍云或者其他地方，然后可以unlink（删除）这个文件。
 	
 		
