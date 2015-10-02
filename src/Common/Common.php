@@ -79,7 +79,7 @@ public static function imagelinethick($image, $x1, $y1, $x2, $y2, $color, $thick
     return imagepolygon($image, $points, 4, $color);
 }
 
-public static function makeimger($text = "内容获取失败...",$types,$ids,$fontPath,$by=""){
+public static function makeimger($text = "内容获取失败...",$types,$ids,$fontPath,$by="",$footer=""){
 	$setStyle = '5f574c|FDFCF5'; #设置颜色,也可以开发为页面可选择并传递这个参数
 	$haveBrLinker = ""; #超长使用分隔符
 	$userStyle = explode('|', $setStyle); #分开颜色
@@ -98,7 +98,7 @@ throw new \Exception("未找到上传目录");
 	}
 	else
 	{
-	//这里是边框宽度，可以前台传递参数
+	//这里是边框宽度，可传递参数
 	$paddingTop = 100;
 	$paddingLeft = 64;
 	$paddingBottom = 57;
@@ -126,8 +126,28 @@ throw new \Exception("未找到上传目录");
 	}
 	
 	$textLen = count($textArr);
+
+$footerLen = 0;
+	if($footer!=""){
+	$footerArr = array();
+	$footerTempArr = explode("\n", trim($footer));
+	$jj = 0;
+	foreach($footerTempArr as $v){
+		$arrFooter = Common::strDiv($v, 16);
+		$textArrFooter[] = array_shift($arrFooter);
+		foreach($arrFooter as $v){
+			$textArrFooter[] = $haveBrLinker . $v;
+			$jj ++;
+			if($jj > 100){ break; }
+		}
+		$jj ++;
+		if($jj > 100){ break; }
+	}
 	
-	$canvasHeight = $lineHeight * $textLen + $canvasHeight;
+	$footerLen = count($textArrFooter);
+}
+	
+	$canvasHeight = $lineHeight * $textLen + $canvasHeight+$footerLen*(14*2);
 	$im = imagecreatetruecolor($canvasWidth, $canvasHeight); #定义画布
 	$colorArray = Common::str2rgb($userStyle[1]);
 	imagefill($im, 0, 0, imagecolorallocate($im, $colorArray['red'], $colorArray['green'], $colorArray['blue']));
@@ -141,6 +161,8 @@ throw new \Exception("未找到上传目录");
 
 	$x1 =$x4= $padding-32;
 	$x2 = $x3 = $canvasWidth - $padding+32 -  1;
+
+
 	$y3 = $y4 = $canvasHeight - $paddingBottom - 32;
 	//可以开发为页面可选择并传递这个参数,选择是否显示边框以及颜色
 	Common::imagelinethick($im, $x1, $y1, $x2, $y2, $colorLine,2);
@@ -165,7 +187,7 @@ throw new \Exception("未找到上传目录");
 
 	}
 	
-	//写入四个随即数字
+	//写入四个随机数
 	$colorArray = Common::str2rgb($userStyle[0]);
 	$fontColor = imagecolorallocate($im, $colorArray['red'], $colorArray['green'], $colorArray['blue']);
 	
@@ -173,10 +195,18 @@ throw new \Exception("未找到上传目录");
 		$offset = $paddingTop + $lineHeight * ($k + 1) - intval(($lineHeight-$fontSize) / 2);
 		imagettftext($im, $fontSize, 0, $paddingLeft, $offset, $fontColor, $fontStyle, $text);
 	}
+
+
+	if($footer!=""){
+		// rgb(149, 165, 166)rgb(236, 240, 241)rgb(127, 140, 141)
+	$offset += 40;
+	$fontColor = imagecolorallocate($im, 200, 198, 190);
+	imagettftext($im, 16, 0, $paddingLeft, $offset,$fontColor, $fontStyle, $footer);
+	}
 	
 
 	
-	$offset += 90;
+	$offset += 110;
 	$fontColor = imagecolorallocate($im, 200, 198, 190);
 	imagettftext($im, 16, 0, $paddingLeft -25, $offset,$fontColor, $fontStyle, $by);
 	imagejpeg($im, $imgfile,100);

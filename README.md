@@ -58,9 +58,11 @@
 
 #### 调用生成图片的方法
 
-	$transform->generate($text);
+	$transform->generate($text,$footer);
 	
 > *$text*:必填,string,填写生成图片的内容。支持"\n"换行
+
+> *$footer*:可选,string,填写图片左下角的小号的字
 
 
 #### 调用返回

@@ -31,7 +31,7 @@ $this->uploadsUrl = $_uploadsUrl;
 }
 
 
-public function generate($text=""){
+public function generate($text="",$footer=""){
 
 
 if($text==""){
@@ -67,7 +67,7 @@ try {
 $common = new Common();
 $basePath = new Path();
 $fileName = $common->fileName();
-$sourceName=$common->makeimger($text,$this->uploadsPath,$fileName,$this->fontPath,$this->by);
+$sourceName=$common->makeimger($text,$this->uploadsPath,$fileName,$this->fontPath,$this->by,$footer);
   $result = array(
     "code"=>200,
     "message"=>"ok",
