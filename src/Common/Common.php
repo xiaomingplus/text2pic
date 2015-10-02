@@ -102,7 +102,7 @@ throw new \Exception("未找到上传目录");
 	$paddingTop = 100;
 	$paddingLeft = 64;
 	$paddingBottom = 60;
-	$copyrightHeight = 130+10;
+	$copyrightHeight = 100;
 	
 	$canvasWidth = 659;
 	$canvasHeight = $paddingTop + $paddingBottom + $copyrightHeight;
@@ -133,7 +133,7 @@ $footerLen = 0;
 	$footerTempArr = explode("\n", trim($footer));
 	$jj = 0;
 	foreach($footerTempArr as $v){
-		$arrFooter = Common::strDiv($v, 16);
+		$arrFooter = Common::strDiv($v, 25);
 		$textArrFooter[] = array_shift($arrFooter);
 		foreach($arrFooter as $v){
 			$textArrFooter[] = $haveBrLinker . $v;
@@ -146,8 +146,31 @@ $footerLen = 0;
 	
 	$footerLen = count($textArrFooter);
 }
+
+$byLen = 0;
+	if($by!=""){
+	$byArr = array();
+	$byTempArr = explode("\n", trim($by));
+	$jjj = 0;
+	foreach($byTempArr as $v){
+		$arrby = Common::strDiv($v, 28);
+		$textArrby[] = array_shift($arrby);
+		foreach($arrby as $v){
+			$textArrby[] = $haveBrLinker . $v;
+			$jjj ++;
+			if($jjj > 100){ break; }
+		}
+		$jjj ++;
+		if($jjj > 100){ break; }
+	}
 	
-	$canvasHeight = $lineHeight * $textLen + $canvasHeight+$footerLen*(16*2);
+	$byLen = count($textArrby);
+}
+
+
+
+	
+	$canvasHeight = $lineHeight * $textLen + $canvasHeight+$footerLen*(16*2)+$byLen*(16*2);
 	$im = imagecreatetruecolor($canvasWidth, $canvasHeight); #定义画布
 	$colorArray = Common::str2rgb($userStyle[1]);
 	imagefill($im, 0, 0, imagecolorallocate($im, $colorArray['red'], $colorArray['green'], $colorArray['blue']));
@@ -163,7 +186,9 @@ $footerLen = 0;
 	$x2 = $x3 = $canvasWidth - $padding+32 -  1;
 
 
-	$y3 = $y4 = $canvasHeight - $paddingBottom - 20;
+	// $y3 = $y4 = $canvasHeight - $paddingBottom - 120;
+		$y3 = $y4 = $lineHeight*$textLen+$footerLen*(16*2)+$paddingTop+50;
+
 	//可以开发为页面可选择并传递这个参数,选择是否显示边框以及颜色
 	Common::imagelinethick($im, $x1, $y1, $x2, $y2, $colorLine,2);
 	Common::imagelinethick($im, $x2, $y2, $x3, $y3, $colorLine,2);
@@ -174,7 +199,9 @@ $footerLen = 0;
 
 	$x1 =$x4= $padding-32-4;
 	$x2 = $x3 = $canvasWidth - $padding+32 +4;
-	$y3 = $y4 = $canvasHeight - $paddingBottom - 36+20;
+	// $y3 = $y4 = $canvasHeight - $paddingBottom - 36+20-100;
+			$y3 = $y4 = $lineHeight*$textLen+$footerLen*(16*2)+$paddingTop+54;
+
 	Common::imagelinethick($im, $x1, $y1, $x2, $y2, $colorLine,2);
 	Common::imagelinethick($im, $x2, $y2, $x3, $y3, $colorLine,2);
 	Common::imagelinethick($im, $x3, $y3, $x4, $y4, $colorLine,2);
@@ -196,22 +223,26 @@ $footerLen = 0;
 		imagettftext($im, $fontSize, 0, $paddingLeft, $offset, $fontColor, $fontStyle, $text);
 	}
 
+	$lineHeightFooter = intval(16 * 2.2);
 
 	if($footer!=""){
-	$offset += 40;
+		$currentTop = $lineHeight*$textLen+$paddingTop;
 	$fontColor = imagecolorallocate($im, 200, 198, 190);
-	$lineHeightFooter = intval(16 * 1.2);
 foreach($textArrFooter as $k=>$footer){
-		$offset +=  $lineHeightFooter * ($k + 1) - intval(($lineHeightFooter-16) / 2);
+		$offset =  $currentTop+$lineHeightFooter * ($k + 1) - intval(($lineHeightFooter-16) / 2);
 		imagettftext($im, 16, 0, $paddingLeft, $offset, $fontColor, $fontStyle, $footer);
 	}
 	}
-	
+		if($by!=""){
 
-	
-	$offset += 80;
+   $currentTop = $lineHeight*$textLen+$paddingTop+$lineHeightFooter*$footerLen+70;
 	$fontColor = imagecolorallocate($im, 200, 198, 190);
-	imagettftext($im, 16, 0, $paddingLeft -25, $offset,$fontColor, $fontStyle, $by);
+	$lineHeightBy = intval(16 * 2.2);
+foreach($textArrby as $k=>$by){
+		$offset =  $currentTop+$lineHeightBy * ($k + 1) - intval(($lineHeightBy-16) / 2);
+		imagettftext($im, 16, 0, $paddingLeft-25, $offset, $fontColor, $fontStyle, $by);
+	}
+	}
 	imagejpeg($im, $imgfile,100);
 	imagedestroy($im);
 	//echo $imgfile;
