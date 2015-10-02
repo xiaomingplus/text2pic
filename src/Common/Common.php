@@ -101,8 +101,8 @@ throw new \Exception("未找到上传目录");
 	//这里是边框宽度，可传递参数
 	$paddingTop = 100;
 	$paddingLeft = 64;
-	$paddingBottom = 57;
-	$copyrightHeight = 130;
+	$paddingBottom = 60;
+	$copyrightHeight = 130+10;
 	
 	$canvasWidth = 659;
 	$canvasHeight = $paddingTop + $paddingBottom + $copyrightHeight;
@@ -147,7 +147,7 @@ $footerLen = 0;
 	$footerLen = count($textArrFooter);
 }
 	
-	$canvasHeight = $lineHeight * $textLen + $canvasHeight+$footerLen*(14*2);
+	$canvasHeight = $lineHeight * $textLen + $canvasHeight+$footerLen*(16*2);
 	$im = imagecreatetruecolor($canvasWidth, $canvasHeight); #定义画布
 	$colorArray = Common::str2rgb($userStyle[1]);
 	imagefill($im, 0, 0, imagecolorallocate($im, $colorArray['red'], $colorArray['green'], $colorArray['blue']));
@@ -163,7 +163,7 @@ $footerLen = 0;
 	$x2 = $x3 = $canvasWidth - $padding+32 -  1;
 
 
-	$y3 = $y4 = $canvasHeight - $paddingBottom - 32;
+	$y3 = $y4 = $canvasHeight - $paddingBottom - 20;
 	//可以开发为页面可选择并传递这个参数,选择是否显示边框以及颜色
 	Common::imagelinethick($im, $x1, $y1, $x2, $y2, $colorLine,2);
 	Common::imagelinethick($im, $x2, $y2, $x3, $y3, $colorLine,2);
@@ -174,7 +174,7 @@ $footerLen = 0;
 
 	$x1 =$x4= $padding-32-4;
 	$x2 = $x3 = $canvasWidth - $padding+32 +4;
-	$y3 = $y4 = $canvasHeight - $paddingBottom - 36+8;
+	$y3 = $y4 = $canvasHeight - $paddingBottom - 36+20;
 	Common::imagelinethick($im, $x1, $y1, $x2, $y2, $colorLine,2);
 	Common::imagelinethick($im, $x2, $y2, $x3, $y3, $colorLine,2);
 	Common::imagelinethick($im, $x3, $y3, $x4, $y4, $colorLine,2);
@@ -198,15 +198,18 @@ $footerLen = 0;
 
 
 	if($footer!=""){
-		// rgb(149, 165, 166)rgb(236, 240, 241)rgb(127, 140, 141)
 	$offset += 40;
 	$fontColor = imagecolorallocate($im, 200, 198, 190);
-	imagettftext($im, 16, 0, $paddingLeft, $offset,$fontColor, $fontStyle, $footer);
+	$lineHeightFooter = intval(16 * 1.2);
+foreach($textArrFooter as $k=>$footer){
+		$offset +=  $lineHeightFooter * ($k + 1) - intval(($lineHeightFooter-16) / 2);
+		imagettftext($im, 16, 0, $paddingLeft, $offset, $fontColor, $fontStyle, $footer);
+	}
 	}
 	
 
 	
-	$offset += 110;
+	$offset += 80;
 	$fontColor = imagecolorallocate($im, 200, 198, 190);
 	imagettftext($im, 16, 0, $paddingLeft -25, $offset,$fontColor, $fontStyle, $by);
 	imagejpeg($im, $imgfile,100);
