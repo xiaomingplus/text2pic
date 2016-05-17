@@ -1,15 +1,15 @@
 {
-	 "name": "dsgygb/text2pic",
+	 "name": "dongzhuoyao/text2pic",
 	 "type": "library",
     "description": "文字生成图片,生成长微博,text generate picture",
     "keywords": ["text2pic","文字生成图片","generate picture"],
-    "homepage": "https://github.com/dsgygb/text2pic",
+    "homepage": "https://github.com/dongzhuoyao/text2pic",
     "license": "MIT",
     "authors": [
         {
-            "name": "杨国宝",
-            "email": "dsgygb@126.com",
-            "homepage": "http://www.yangguobao.cn",
+            "name": "dongzhuoyao",
+            "email": "929109550@qq.com",
+            "homepage": "http://www.dongzhuoyao.com",
             "role": "Developer"
         }
     ],
@@ -26,7 +26,7 @@
         "branch-alias": {
             "dev-master": "1.2.x-dev"
         }
-    }    
+    }
 
-    
+
 }
